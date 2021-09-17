@@ -1,0 +1,35 @@
+﻿@model IEnumerable<GamesLibMVC.Models.Genre>
+
+@{
+    ViewData["Title"] = "Жанры";
+}
+
+<h1>Жанры</h1>
+
+<p>
+    <a asp-action="Create">Добавить жанр</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GenreName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GenreName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GenreID">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.GenreID">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.GenreID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

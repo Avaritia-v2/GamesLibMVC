@@ -1,0 +1,52 @@
+﻿@model IEnumerable<GamesLibMVC.Models.GameInfo>
+
+@{
+    ViewData["Title"] = "Информация";
+}
+
+<h1>Игры по жанрам</h1>
+
+<p>
+    <a asp-action="Create">Добавить игре жанр</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Искать по жанру: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-action="Index">Сброс</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Game.GameName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre.GenreName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Game.GameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.GenreName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GameInfoID">Изменить</a> |
+                <a asp-action="Details" asp-route-id="@item.GameInfoID">Подробнее</a> |
+                <a asp-action="Delete" asp-route-id="@item.GameInfoID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
